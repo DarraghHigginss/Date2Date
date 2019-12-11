@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DbD"
+             x:Class="DbD.MainPage"
+             BackgroundColor = "IndianRed" > <!--Background colour for the application-->
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <!--design of the Page and formats of dates -->
+    <StackLayout Margin="10">
+        <Label Text="Days|2|Dates"
+               FontSize="Large"
+               FontAttributes="Italic,Bold"
+               Style="{DynamicResource TitleStyle}"
+               Margin="0, 20"
+               HorizontalTextAlignment="Center" />
+
+
+
+        <Label Text="Start Date:" />
+        <DatePicker x:Name="startDatePicker"
+                    Format="D"
+                    Margin="30, 0, 0, 30"
+                    DateSelected="OnDateSelected" />
+
+
+
+        <Label Text="End Date:" />
+        <DatePicker x:Name="endDatePicker"
+                    MinimumDate="{Binding Source={x:Reference startDatePicker},
+                                          Path=Date}"
+                    Format="D"
+                    Margin="30, 0, 0, 30"
+                    DateSelected="OnDateSelected" />
+
+
+        <StackLayout Orientation="Horizontal"
+                     Margin="0, 0, 0, 30">
+            <Label Text="Include both Of the days chosen in total: "
+                   VerticalOptions="Center" />
+            <Switch x:Name="includeSwitch"
+                    Toggled="OnSwitchToggled" />
+        </StackLayout>
+
+        <Label x:Name="resultLabel"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center" />
+
+    </StackLayout>
+</ContentPage>
